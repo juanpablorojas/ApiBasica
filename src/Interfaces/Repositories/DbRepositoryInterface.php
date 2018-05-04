@@ -43,4 +43,14 @@ interface DbRepositoryInterface
      * @return boolean
      */
     public function update($id, $tableName, $dto);
+
+    /**
+     * Función encargada de eliminar registros mediante la coincidencia
+     * del valor id con el atributo $id
+     *
+     * @param $id
+     * @param $tableName
+     * @return mixed
+     */
+    public function delete($id, $tableName);
 }

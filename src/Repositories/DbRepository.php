@@ -206,4 +206,22 @@ class DbRepository extends dbConfig implements DbRepositoryInterface
         $long = strlen($query);
         return substr($query, 0, $long -1);
     }
+
+    /**
+     * @param $id
+     * @param $tableName
+     * @return bool
+     */
+    public function delete($id, $tableName)
+    {
+        $this->query = 'DELETE FROM '.$tableName." WHERE id = :id";
+        $statement = $this->conn->prepare($this->query);
+        $statement->bindParam(':id', $id);
+        try {
+            $statement->execute();
+            return true;
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
 }
