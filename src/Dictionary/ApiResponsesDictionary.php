@@ -38,4 +38,13 @@ final class ApiResponsesDictionary
         'code' => 500,
         'status' => 'error'
     ];
+    const CANT_DELETE_RECORD = [
+        'message' => 'No se pudo eliminar el registro',
+        'code' => 500,
+        'status' => 'error'
+        ];
+    const DELETED_SUCCESS = [
+        'message' => 'Se eliminó correctamente el registro',
+        'code' => 200
+    ];
 }

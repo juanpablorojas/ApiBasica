@@ -6,6 +6,7 @@ use ApiExperimental\src\config\dbConfig;
 use ApiExperimental\src\Dictionaries\DbRepositoryDictionary;
 use ApiExperimental\src\Dtos\ProductDto;
 use ApiExperimental\src\Interfaces\Repositories\DbRepositoryInterface;
+use phpDocumentor\Reflection\DocBlock\Tags\Var_;
 
 include_once '../Interfaces/Repositories/DbRepositoryInterface.php';
 include_once '../config/dbConfig.php';
@@ -219,9 +220,13 @@ class DbRepository extends dbConfig implements DbRepositoryInterface
         $statement->bindParam(':id', $id);
         try {
             $statement->execute();
-            return true;
         } catch (\Exception $e) {
             return false;
         }
+        $affectedRows = $statement->rowCount();
+        if ($affectedRows == 0) {
+            return false;
+        }
+        return true;
     }
 }
