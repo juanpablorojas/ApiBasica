@@ -47,4 +47,9 @@ final class ApiResponsesDictionary
         'message' => 'Se eliminó correctamente el registro',
         'code' => 200
     ];
+    const COINCIDENCE_NOT_FOUND = [
+        'message' => 'No se encontraron coincidencias con los parametros enviados',
+        'code' => 200,
+        'status' => 'sin coincidencias'
+    ];
 }

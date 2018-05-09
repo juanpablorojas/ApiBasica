@@ -209,6 +209,7 @@ class DbRepository extends dbConfig implements DbRepositoryInterface
     }
 
     /**
+     * @inheritdoc
      * @param $id
      * @param $tableName
      * @return bool
@@ -228,5 +229,50 @@ class DbRepository extends dbConfig implements DbRepositoryInterface
             return false;
         }
         return true;
+    }
+
+    /**
+     * @param array $keyWords
+     * @param string $tableName
+     * @return bool | array
+     */
+    public function search($keyWords, $tableName = 'products')
+    {
+        /**$this->query = "SELECT
+                p.id, p.name, p.description, p.price, p.category_id, p.created
+            FROM
+                ". $tableName. " p
+            WHERE
+                p.name LIKE ? OR p.description LIKE ?
+            ORDER BY
+                p.created DESC";**/
+
+       $this->query = "SELECT
+                c.name as category_name, p.id, p.name, p.description, p.price, p.category_id, p.created
+            FROM
+                " . $tableName . " p
+                LEFT JOIN
+                    categories c
+                        ON p.category_id = c.id
+            WHERE
+                p.name LIKE ? OR p.description LIKE ? OR c.name LIKE ?
+            ORDER BY
+                p.created DESC";
+
+        $statement = $this->conn->prepare($this->query);
+        $keyWords = "%{$keyWords}%";
+        $statement->bindParam(1, $keyWords);
+        $statement->bindParam(2, $keyWords);
+        $statement->bindParam(3, $keyWords);
+        try {
+            $statement->execute();
+        } catch (\Exception $e) {
+             return false;
+        }
+        $raw = [];
+        while ($result = $statement->fetch(\PDO::FETCH_ASSOC)) {
+            array_push($raw, $result);
+        }
+        return $raw;
     }
 }

@@ -53,4 +53,13 @@ interface DbRepositoryInterface
      * @return mixed
      */
     public function delete($id, $tableName);
+
+    /**
+     * Función encargada de realizar búsqueda de coincidencias en la tabla de productos
+     *
+     * @param array $keyWords
+     * @param string $tableName
+     * @return array
+     */
+    public function search($keyWords, $tableName);
 }

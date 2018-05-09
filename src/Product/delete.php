@@ -15,7 +15,7 @@ use ApiExperimental\src\Repositories\DbRepository;
 
 $id = getId();
 
-if ($id == null) {
+if ($id == false) {
     echo json_encode(ApiResponsesDictionary::BAD_REQUEST);
     die();
 }
@@ -43,7 +43,7 @@ echo json_encode(ApiResponsesDictionary::DELETED_SUCCESS);
 function getId()
 {
     if (isset($_GET['id']) == false) {
-        return null;
+        return false;
     }
     return $_GET['id'];
 }
