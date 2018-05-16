@@ -1,6 +1,6 @@
 <?php
 
-namespace ApiExperimental\src\Dictionaries;
+namespace ApiExperimental\src\Dictionary;
 
 include_once 'ProductDtoDictionary.php';
 
@@ -8,7 +8,7 @@ use ApiExperimental\src\Dictionaries\ProductDtoDictionary;
 
 /**
  * Class DbRepositoryDictionary
- * @package ApiExperimental\src\Dictionaries
+ * @package ApiExperimental\src\Dictionary
  */
 final class DbRepositoryDictionary
 {

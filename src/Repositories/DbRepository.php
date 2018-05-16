@@ -2,15 +2,14 @@
 
 namespace ApiExperimental\src\Repositories;
 
+include_once '../../vendor/autoload.php';
+
 use ApiExperimental\src\config\dbConfig;
-use ApiExperimental\src\Dictionaries\DbRepositoryDictionary;
+use ApiExperimental\src\Dictionary\DbRepositoryDictionary;
 use ApiExperimental\src\Dtos\ProductDto;
 use ApiExperimental\src\Interfaces\Repositories\DbRepositoryInterface;
-use phpDocumentor\Reflection\DocBlock\Tags\Var_;
-
-include_once '../Interfaces/Repositories/DbRepositoryInterface.php';
-include_once '../config/dbConfig.php';
-include '../Dictionary/DbRepositoryDictionary.php';
+use Illuminate\Database\Capsule\Manager as Capsule;
+use Illuminate\Database\Capsule\Manager;
 
 /**
  * Clase encargada de realizar la conexión a base de datos
@@ -34,11 +33,27 @@ class DbRepository extends dbConfig implements DbRepositoryInterface
      */
     public $productsDictionary;
 
+    /**
+     * @var Manager
+     */
+    public $capsule;
+
 
     public function __construct()
     {
         $this->productsDictionary = new DbRepositoryDictionary();
         $this->conn = $this->getConnection();
+        $this->capsule = new Capsule();
+        $this->capsule->addConnection([
+                'driver' => 'mysql',
+                'host' => $this::HOST,
+                'database' => $this::DATABASE_NAME,
+                'username' => $this::USER_NAME,
+                'password' => $this::PASSWORD,
+                'charset' => 'utf8'
+            ]);
+        $this->capsule->setAsGlobal();
+        $this->capsule->bootEloquent();
     }
 
     /**
@@ -215,7 +230,7 @@ class DbRepository extends dbConfig implements DbRepositoryInterface
      * @return bool
      */
     public function delete($id, $tableName)
-    {
+    {/**
         $this->query = 'DELETE FROM '.$tableName." WHERE id = :id";
         $statement = $this->conn->prepare($this->query);
         $statement->bindParam(':id', $id);
@@ -228,7 +243,9 @@ class DbRepository extends dbConfig implements DbRepositoryInterface
         if ($affectedRows == 0) {
             return false;
         }
-        return true;
+        return true;**/
+        $affected =  $this->capsule::table($tableName)->where('id', '=', $id)->delete();
+        return $affected;
     }
 
     /**

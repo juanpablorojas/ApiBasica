@@ -1,6 +1,6 @@
 <?php
 
-namespace ApiExperimental\src\config;
+namespace ApiExperimental\src\Config;
 
 /**
  * Class dbConfig
