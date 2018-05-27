@@ -140,36 +140,12 @@ class DbRepository extends dbConfig implements DbRepositoryInterface
     }
 
     /**
-     * @inheritdoc
      * @param $id
      * @param $tableName
-     * @return null | array
+     * @return mixed
      */
     public function readOne($id, $tableName)
     {
-        /**
-        $this->query = "SELECT
-                c.name as category_name, p.id, p.name, p.description, p.price, p.category_id, p.created
-            FROM
-                " . $tableName . " p
-                LEFT JOIN
-                    categories c
-                        ON p.category_id = c.id
-            WHERE
-                p.id = ?
-            LIMIT
-                0,1";
-
-        $statement = $this->conn->prepare($this->query);
-
-        $statement->bindParam(1, $id);
-**//**
-        try {
-            $statement->execute();
-        } catch (Exception $e) {
-            return null;
-        }
-        $row = $statement->fetch(\PDO::FETCH_ASSOC);**/
         $row = ProductModel::find($id)
             ->join('categories', 'category_id', '=', 'categories.id')
             ->select('products.*','categories.name as category_name')
@@ -237,23 +213,13 @@ class DbRepository extends dbConfig implements DbRepositoryInterface
      * @param $tableName
      * @return bool
      */
-    public function delete($id, $tableName)
-    {/**
-        $this->query = 'DELETE FROM '.$tableName." WHERE id = :id";
-        $statement = $this->conn->prepare($this->query);
-        $statement->bindParam(':id', $id);
-        try {
-            $statement->execute();
-        } catch (\Exception $e) {
+    public function delete($id)
+    {
+        $record = ProductModel::query()->find($id);
+        if ($record == null) {
             return false;
         }
-        $affectedRows = $statement->rowCount();
-        if ($affectedRows == 0) {
-            return false;
-        }
-        return true;**/
-        $affected =  Capsule::table($tableName)->where('id', '=', $id)->delete();
-        return $affected;
+        return $record->delete();
     }
 
     /**

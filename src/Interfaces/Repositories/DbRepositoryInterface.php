@@ -49,10 +49,9 @@ interface DbRepositoryInterface
      * del valor id con el atributo $id
      *
      * @param $id
-     * @param $tableName
      * @return mixed
      */
-    public function delete($id, $tableName);
+    public function delete($id);
 
     /**
      * Función encargada de realizar búsqueda de coincidencias en la tabla de productos
