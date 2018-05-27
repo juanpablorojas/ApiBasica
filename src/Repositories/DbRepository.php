@@ -8,6 +8,8 @@ use ApiExperimental\src\config\dbConfig;
 use ApiExperimental\src\Dictionary\DbRepositoryDictionary;
 use ApiExperimental\src\Dtos\ProductDto;
 use ApiExperimental\src\Interfaces\Repositories\DbRepositoryInterface;
+use ApiExperimental\src\Models\CategoriesModel;
+use ApiExperimental\src\Models\ProductModel;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Database\Capsule\Manager;
 
@@ -145,6 +147,7 @@ class DbRepository extends dbConfig implements DbRepositoryInterface
      */
     public function readOne($id, $tableName)
     {
+        /**
         $this->query = "SELECT
                 c.name as category_name, p.id, p.name, p.description, p.price, p.category_id, p.created
             FROM
@@ -160,13 +163,18 @@ class DbRepository extends dbConfig implements DbRepositoryInterface
         $statement = $this->conn->prepare($this->query);
 
         $statement->bindParam(1, $id);
-
+**//**
         try {
             $statement->execute();
         } catch (Exception $e) {
             return null;
         }
-        $row = $statement->fetch(\PDO::FETCH_ASSOC);
+        $row = $statement->fetch(\PDO::FETCH_ASSOC);**/
+        $row = ProductModel::find($id)
+            ->join('categories', 'category_id', '=', 'categories.id')
+            ->select('products.*','categories.name as category_name')
+            ->first()
+            ->toArray();
         return $row;
     }
 
@@ -244,7 +252,7 @@ class DbRepository extends dbConfig implements DbRepositoryInterface
             return false;
         }
         return true;**/
-        $affected =  $this->capsule::table($tableName)->where('id', '=', $id)->delete();
+        $affected =  Capsule::table($tableName)->where('id', '=', $id)->delete();
         return $affected;
     }
 
