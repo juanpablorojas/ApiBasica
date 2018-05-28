@@ -1,11 +1,11 @@
 <?php
 
-namespace ApiExperimental\src\Interfaces\Builders;
+namespace ApiBasica\Interfaces\Builders;
 
-use ApiExperimental\src\Dictionaries\ApiResponsesDictionary;
-use ApiExperimental\src\Dtos\ApiResponseSuccessDto;
-use ApiExperimental\src\Interfaces\Capabilities\BuiltableInterface;
-use ApiExperimental\src\Traits\ReponseTrait;
+use ApiBasica\Dictionaries\ApiResponsesDictionary;
+use ApiBasica\Dtos\ApiResponseSuccessDto;
+use ApiBasica\Interfaces\Capabilities\BuiltableInterface;
+use ApiBasica\Traits\ReponseTrait;
 
 /**
  * Class ApiResponseSuccessBuilder

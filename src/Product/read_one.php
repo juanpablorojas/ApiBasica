@@ -11,9 +11,9 @@ include_once '../Dtos/ProductDto.php';
 include_once '../Builders/ProductDtoBuilder.php';
 include_once '../Dictionary/ApiResponsesDictionary.php';
 
-use ApiExperimental\src\Repositories\DbRepository;
-use ApiExperimental\src\Dictionaries\ApiResponsesDictionary;
-use ApiExperimental\src\Builders\ProductDtoBuilder;
+use ApiBasica\Repositories\DbRepository;
+use ApiBasica\Dictionaries\ApiResponsesDictionary;
+use ApiBasica\Builders\ProductDtoBuilder;
 
 $searchedId = getId();
 if ($searchedId == null) {

@@ -1,5 +1,5 @@
 {
-  "name": "ApiExperimental",
+  "name": "ApiBasica",
   "type": "library",
   "license": "Public",
   "authors": [
@@ -10,7 +10,8 @@
   ],
   "minimum-stability": "stable",
   "require": {
-    "php": ">=5.3"
+    "php": ">=5.3",
+    "illuminate/database": "^5.6"
   },
   "require-dev": {
     "phpunit/phpunit": "^4",
@@ -18,8 +19,8 @@
   },
   "autoload": {
     "psr-4": {
-      "ApiExperimental\\Core\\": "src\\",
-      "ApiExperimental\\Core\\Tests\\": "tests\\"
+      "ApiBasica\\": "src",
+      "ApiBasica\\vendor\\" : "vendor"
     }
   }
 }

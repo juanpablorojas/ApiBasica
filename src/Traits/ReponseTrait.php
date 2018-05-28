@@ -1,6 +1,6 @@
 <?php
 
-namespace ApiExperimental\src\Traits;
+namespace ApiBasica\Traits;
 
 /**
  * Trait ReponseTrait

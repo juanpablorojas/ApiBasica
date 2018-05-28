@@ -1,8 +1,8 @@
 <?php
 
-namespace ApiExperimental\src\Interfaces\Builders;
+namespace ApiBasica\Interfaces\Builders;
 
-use ApiExperimental\src\Interfaces\Capabilities\BuiltableInterface;
+use ApiBasica\Interfaces\Capabilities\BuiltableInterface;
 
 /**
  * Interface BuilderInterface

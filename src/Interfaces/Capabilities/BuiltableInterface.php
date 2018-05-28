@@ -1,6 +1,6 @@
 <?php
 
-namespace ApiExperimental\src\Interfaces\Capabilities;
+namespace ApiBasica\Interfaces\Capabilities;
 
 /**
  * Interface BuiltableInterface

@@ -1,8 +1,8 @@
 <?php
 
-namespace ApiExperimental\src\Traits;
+namespace ApiBasica\Traits;
 
-use ApiExperimental\src\Helpers\StringHelper;
+use ApiBasica\Helpers\StringHelper;
 
 include_once '../Helpers/StringHelper.php';
 

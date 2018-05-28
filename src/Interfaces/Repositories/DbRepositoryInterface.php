@@ -1,8 +1,8 @@
 <?php
 
-namespace ApiExperimental\src\Interfaces\Repositories;
+namespace ApiBasica\Interfaces\Repositories;
 
-use ApiExperimental\src\Dtos\ProductDto;
+use ApiBasica\Dtos\ProductDto;
 
 /**
  * Interface DbRepositoryInterface
@@ -43,4 +43,31 @@ interface DbRepositoryInterface
      * @return boolean
      */
     public function update($id, $tableName, $dto);
+
+    /**
+     * Función encargada de eliminar registros mediante la coincidencia
+     * del valor id con el atributo $id
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function delete($id);
+
+    /**
+     * Función encargada de realizar búsqueda de coincidencias en la tabla de productos
+     *
+     * @param array $keyWords
+     * @param string $tableName
+     * @return array
+     */
+    public function search($keyWords, $tableName);
+
+    /**
+     * Función para solicitar al repositorio una cantidad n de registros, iniciando por el registro numero x del set
+     *
+     * @param int $initialRecord
+     * @param int $recordsNeeded
+     * @return array
+     */
+    public function readPaging($initialRecord, $recordsNeeded);
 }

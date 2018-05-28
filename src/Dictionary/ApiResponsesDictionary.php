@@ -1,6 +1,6 @@
 <?php
 
-namespace ApiExperimental\src\Dictionaries;
+namespace ApiBasica\Dictionaries;
 
 /**
  * Class ApiResponsesDictionary
@@ -37,5 +37,19 @@ final class ApiResponsesDictionary
         'message' => 'No se pudo completar la solicitud',
         'code' => 500,
         'status' => 'error'
+    ];
+    const CANT_DELETE_RECORD = [
+        'message' => 'No se pudo eliminar el registro',
+        'code' => 500,
+        'status' => 'error'
+        ];
+    const DELETED_SUCCESS = [
+        'message' => 'Se eliminó correctamente el registro',
+        'code' => 200
+    ];
+    const COINCIDENCE_NOT_FOUND = [
+        'message' => 'No se encontraron coincidencias con los parametros enviados',
+        'code' => 200,
+        'status' => 'sin coincidencias'
     ];
 }

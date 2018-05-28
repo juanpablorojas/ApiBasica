@@ -1,15 +1,16 @@
 <?php
 
-namespace ApiExperimental\src\Repositories;
+namespace ApiBasica\Repositories;
 
-use ApiExperimental\src\config\dbConfig;
-use ApiExperimental\src\Dictionaries\DbRepositoryDictionary;
-use ApiExperimental\src\Dtos\ProductDto;
-use ApiExperimental\src\Interfaces\Repositories\DbRepositoryInterface;
+include_once '../../vendor/autoload.php';
 
-include_once '../Interfaces/Repositories/DbRepositoryInterface.php';
-include_once '../config/dbConfig.php';
-include '../Dictionary/DbRepositoryDictionary.php';
+use ApiBasica\Config\dbConfig;
+use ApiBasica\Dictionary\DbRepositoryDictionary;
+use ApiBasica\Dtos\ProductDto;
+use ApiBasica\Interfaces\Repositories\DbRepositoryInterface;
+use ApiBasica\Models\ProductModel;
+use Illuminate\Database\Capsule\Manager as Capsule;
+use Illuminate\Database\Capsule\Manager;
 
 /**
  * Clase encargada de realizar la conexión a base de datos
@@ -33,11 +34,27 @@ class DbRepository extends dbConfig implements DbRepositoryInterface
      */
     public $productsDictionary;
 
+    /**
+     * @var Manager
+     */
+    public $capsule;
+
 
     public function __construct()
     {
         $this->productsDictionary = new DbRepositoryDictionary();
         $this->conn = $this->getConnection();
+        $this->capsule = new Capsule();
+        $this->capsule->addConnection([
+                'driver' => 'mysql',
+                'host' => $this::HOST,
+                'database' => $this::DATABASE_NAME,
+                'username' => $this::USER_NAME,
+                'password' => $this::PASSWORD,
+                'charset' => 'utf8'
+            ]);
+        $this->capsule->setAsGlobal();
+        $this->capsule->bootEloquent();
     }
 
     /**
@@ -122,35 +139,17 @@ class DbRepository extends dbConfig implements DbRepositoryInterface
     }
 
     /**
-     * @inheritdoc
      * @param $id
      * @param $tableName
-     * @return null | array
+     * @return mixed
      */
     public function readOne($id, $tableName)
     {
-        $this->query = "SELECT
-                c.name as category_name, p.id, p.name, p.description, p.price, p.category_id, p.created
-            FROM
-                " . $tableName . " p
-                LEFT JOIN
-                    categories c
-                        ON p.category_id = c.id
-            WHERE
-                p.id = ?
-            LIMIT
-                0,1";
-
-        $statement = $this->conn->prepare($this->query);
-
-        $statement->bindParam(1, $id);
-
-        try {
-            $statement->execute();
-        } catch (Exception $e) {
-            return null;
-        }
-        $row = $statement->fetch(\PDO::FETCH_ASSOC);
+        $row = ProductModel::find($id)
+            ->join('categories', 'category_id', '=', 'categories.id')
+            ->select('products.*','categories.name as category_name')
+            ->first()
+            ->toArray();
         return $row;
     }
 
@@ -205,5 +204,73 @@ class DbRepository extends dbConfig implements DbRepositoryInterface
         }
         $long = strlen($query);
         return substr($query, 0, $long -1);
+    }
+
+    /**
+     * @inheritdoc
+     * @param $id
+     * @param $tableName
+     * @return bool
+     */
+    public function delete($id)
+    {
+        $record = ProductModel::query()->find($id);
+        if ($record == null) {
+            return false;
+        }
+        return $record->delete();
+    }
+
+    /**
+     * @param array $keyWords
+     * @param string $tableName
+     * @return bool | array
+     */
+    public function search($keyWords, $tableName = 'products')
+    {
+        /**$this->query = "SELECT
+                p.id, p.name, p.description, p.price, p.category_id, p.created
+            FROM
+                ". $tableName. " p
+            WHERE
+                p.name LIKE ? OR p.description LIKE ?
+            ORDER BY
+                p.created DESC";**/
+
+       $this->query = "SELECT
+                c.name as category_name, p.id, p.name, p.description, p.price, p.category_id, p.created
+            FROM
+                " . $tableName . " p
+                LEFT JOIN
+                    categories c
+                        ON p.category_id = c.id
+            WHERE
+                p.name LIKE ? OR p.description LIKE ? OR c.name LIKE ?
+            ORDER BY
+                p.created DESC";
+
+        $statement = $this->conn->prepare($this->query);
+        $keyWords = "%{$keyWords}%";
+        $statement->bindParam(1, $keyWords);
+        $statement->bindParam(2, $keyWords);
+        $statement->bindParam(3, $keyWords);
+        try {
+            $statement->execute();
+        } catch (\Exception $e) {
+             return false;
+        }
+        $raw = [];
+        while ($result = $statement->fetch(\PDO::FETCH_ASSOC)) {
+            array_push($raw, $result);
+        }
+        return $raw;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function readPaging($initialRecord = 0, $recordsNeeded = 1)
+    {
+        return ProductModel::all()->skip($initialRecord)->take($recordsNeeded)->toArray();
     }
 }

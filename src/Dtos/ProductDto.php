@@ -1,8 +1,9 @@
 <?php
 
-namespace ApiExperimental\src\Dtos;
+namespace ApiBasica\Dtos;
 
-use ApiExperimental\src\Interfaces\Capabilities\BuiltableInterface;
+use ApiBasica\Interfaces\Capabilities\BuiltableInterface;
+
 include_once '../Interfaces/Capabilities/BuiltableInterface.php';
 
 /**
