@@ -1,6 +1,6 @@
 <?php
 
-namespace ApiExperimental\src\Helpers;
+namespace ApiBasica\Helpers;
 
 /**
  * Class ValuesHelper

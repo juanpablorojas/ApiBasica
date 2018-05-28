@@ -1,5 +1,5 @@
 {
-  "name": "ApiExperimental",
+  "name": "ApiBasica",
   "type": "library",
   "license": "Public",
   "authors": [
@@ -19,8 +19,8 @@
   },
   "autoload": {
     "psr-4": {
-      "ApiExperimental\\src\\": "src/",
-      "ApiExperimental\\vendor\\": "vendor/" 
+      "ApiBasica\\": "src",
+      "ApiBasica\\vendor\\" : "vendor"
     }
   }
 }

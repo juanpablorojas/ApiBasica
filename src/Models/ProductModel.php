@@ -1,6 +1,6 @@
 <?php
 
-namespace ApiExperimental\src\Models;
+namespace ApiBasica\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

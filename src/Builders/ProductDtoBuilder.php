@@ -1,12 +1,13 @@
 <?php
 
-namespace ApiExperimental\src\Builders;
+namespace ApiBasica\Builders;
 
-use ApiExperimental\src\Dtos\ProductDto;
-use ApiExperimental\src\Interfaces\Builders\BuilderInterface;
-use ApiExperimental\src\Dictionaries\ProductDtoDictionary;
-use ApiExperimental\src\Interfaces\Capabilities\BuiltableInterface;
-use ApiExperimental\src\Traits\StringHelperTrait;
+use ApiBasica\Dtos\ProductDto;
+use ApiBasica\Interfaces\Builders\BuilderInterface;
+use ApiBasica\Dictionaries\ProductDtoDictionary;
+use ApiBasica\Interfaces\Capabilities\BuiltableInterface;
+use ApiBasica\Traits\StringHelperTrait;
+
 include_once '../Dtos/ProductDto.php';
 include_once  '../Dictionary/ProductDtoDictionary.php';
 include_once  '../Interfaces/Capabilities/BuiltableInterface.php';

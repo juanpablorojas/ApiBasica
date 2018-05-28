@@ -1,15 +1,14 @@
 <?php
 
-namespace ApiExperimental\src\Repositories;
+namespace ApiBasica\Repositories;
 
 include_once '../../vendor/autoload.php';
 
-use ApiExperimental\src\config\dbConfig;
-use ApiExperimental\src\Dictionary\DbRepositoryDictionary;
-use ApiExperimental\src\Dtos\ProductDto;
-use ApiExperimental\src\Interfaces\Repositories\DbRepositoryInterface;
-use ApiExperimental\src\Models\CategoriesModel;
-use ApiExperimental\src\Models\ProductModel;
+use ApiBasica\Config\dbConfig;
+use ApiBasica\Dictionary\DbRepositoryDictionary;
+use ApiBasica\Dtos\ProductDto;
+use ApiBasica\Interfaces\Repositories\DbRepositoryInterface;
+use ApiBasica\Models\ProductModel;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Database\Capsule\Manager;
 
@@ -265,5 +264,13 @@ class DbRepository extends dbConfig implements DbRepositoryInterface
             array_push($raw, $result);
         }
         return $raw;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function readPaging($initialRecord = 0, $recordsNeeded = 1)
+    {
+        return ProductModel::all()->skip($initialRecord)->take($recordsNeeded)->toArray();
     }
 }

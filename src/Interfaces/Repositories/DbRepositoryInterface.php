@@ -1,8 +1,8 @@
 <?php
 
-namespace ApiExperimental\src\Interfaces\Repositories;
+namespace ApiBasica\Interfaces\Repositories;
 
-use ApiExperimental\src\Dtos\ProductDto;
+use ApiBasica\Dtos\ProductDto;
 
 /**
  * Interface DbRepositoryInterface
@@ -61,4 +61,13 @@ interface DbRepositoryInterface
      * @return array
      */
     public function search($keyWords, $tableName);
+
+    /**
+     * Función para solicitar al repositorio una cantidad n de registros, iniciando por el registro numero x del set
+     *
+     * @param int $initialRecord
+     * @param int $recordsNeeded
+     * @return array
+     */
+    public function readPaging($initialRecord, $recordsNeeded);
 }

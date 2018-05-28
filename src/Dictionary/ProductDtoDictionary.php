@@ -1,6 +1,6 @@
 <?php
 
-namespace ApiExperimental\src\Dictionaries;
+namespace ApiBasica\Dictionaries;
 
 /**
  * Class ProductDtoDictionary
