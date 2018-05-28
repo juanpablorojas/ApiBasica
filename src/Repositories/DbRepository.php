@@ -145,6 +145,10 @@ class DbRepository extends dbConfig implements DbRepositoryInterface
      */
     public function readOne($id, $tableName)
     {
+        $row = ProductModel::find($id);
+        if ($row == null) {
+            return $row;
+        }
         $row = ProductModel::find($id)
             ->join('categories', 'category_id', '=', 'categories.id')
             ->select('products.*','categories.name as category_name')

@@ -25,5 +25,7 @@ $RECYCLE.BIN/
 #vendor
 /vendor
 /.idea
+composer.lock
+.idea/
 
 .env
