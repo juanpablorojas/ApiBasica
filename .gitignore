@@ -27,5 +27,4 @@ $RECYCLE.BIN/
 /.idea
 composer.lock
 .idea/
-
 .env
