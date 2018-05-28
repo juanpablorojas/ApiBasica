@@ -9,7 +9,7 @@ use ApiBasica\Interfaces\Capabilities\BuiltableInterface;
 use ApiBasica\Traits\StringHelperTrait;
 
 include_once '../Dtos/ProductDto.php';
-include_once  '../Dictionary/ProductDtoDictionary.php';
+include_once '../Dictionaries/ProductDtoDictionary.php';
 include_once  '../Interfaces/Capabilities/BuiltableInterface.php';
 include_once  '../Traits/StringHelperTrait.php';
 include_once  '../Interfaces/Builders/BuilderInterface.php';

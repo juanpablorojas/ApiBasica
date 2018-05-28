@@ -1,14 +1,12 @@
 <?php
 
-namespace ApiBasica\Dictionary;
-
-include_once 'ProductDtoDictionary.php';
+namespace ApiBasica\Dictionaries;
 
 use ApiBasica\Dictionaries\ProductDtoDictionary;
 
 /**
  * Class DbRepositoryDictionary
- * @package ApiExperimental\src\Dictionary
+ * @package ApiExperimental\src\Dictionaries
  */
 final class DbRepositoryDictionary
 {

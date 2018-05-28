@@ -4,7 +4,7 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
 include_once '../Builders/ProductDtoBuilder.php';
-include_once '../Dictionary/ApiResponsesDictionary.php';
+include_once '../Dictionaries/ApiResponseDictionary.php';
 include_once '../Repositories/DbRepository.php';
 
 use ApiExperimental\src\Builders\ProductDtoBuilder;

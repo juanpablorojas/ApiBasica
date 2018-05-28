@@ -11,7 +11,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 include_once '../Repositories/DbRepository.php';
 include_once '../Dtos/ProductDto.php';
 include_once '../Builders/ProductDtoBuilder.php';
-include '../Dictionary/ApiResponsesDictionary.php';
+include '../Dictionaries/ApiResponseDictionary.php';
 
 use ApiExperimental\src\Repositories\DbRepository;
 use ApiExperimental\src\Builders\ProductDtoBuilder;

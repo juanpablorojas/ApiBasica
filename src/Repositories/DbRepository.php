@@ -5,7 +5,7 @@ namespace ApiBasica\Repositories;
 include_once '../../vendor/autoload.php';
 
 use ApiBasica\Config\dbConfig;
-use ApiBasica\Dictionary\DbRepositoryDictionary;
+use ApiBasica\Dictionaries\DbRepositoryDictionary;
 use ApiBasica\Dtos\ProductDto;
 use ApiBasica\Interfaces\Repositories\DbRepositoryInterface;
 use ApiBasica\Models\ProductModel;
@@ -275,6 +275,6 @@ class DbRepository extends dbConfig implements DbRepositoryInterface
      */
     public function readPaging($initialRecord = 0, $recordsNeeded = 1)
     {
-        return ProductModel::all()->skip($initialRecord)->take($recordsNeeded)->toArray();
+        return ProductModel::skip($initialRecord)->take($recordsNeeded)->get()->toArray();
     }
 }

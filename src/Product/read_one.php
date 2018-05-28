@@ -6,18 +6,15 @@ header("Access-Control-Allow-Methods: GET");
 header("Access-Control-Allow-Credentials: true");
 header('Content-Type: application/json');
 
-include_once '../Repositories/DbRepository.php';
-include_once '../Dtos/ProductDto.php';
-include_once '../Builders/ProductDtoBuilder.php';
-include_once '../Dictionary/ApiResponsesDictionary.php';
+include_once '../../vendor/autoload.php';
 
 use ApiBasica\Repositories\DbRepository;
-use ApiBasica\Dictionaries\ApiResponsesDictionary;
 use ApiBasica\Builders\ProductDtoBuilder;
+use ApiBasica\Dictionaries\ApiResponseDictionary;
 
 $searchedId = getId();
 if ($searchedId == null) {
-    echo json_encode(ApiResponsesDictionary::BAD_REQUEST);
+    echo json_encode(ApiResponseDictionary::BAD_REQUEST);
     die();
 }
 
@@ -25,7 +22,7 @@ $repository = new DbRepository();
 $repository->getConnection();
 $raw = $repository->readOne($searchedId, 'products');
 if ($raw == null) {
-    echo json_encode(ApiResponsesDictionary::ERROR_REGISTER_NOT_FOUND);
+    echo json_encode(ApiResponseDictionary::ERROR_REGISTER_NOT_FOUND);
     die();
 }
 $builder = new ProductDtoBuilder($raw);

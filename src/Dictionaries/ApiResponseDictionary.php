@@ -6,7 +6,7 @@ namespace ApiBasica\Dictionaries;
  * Class ApiResponsesDictionary
  * @package ApiExperimental\src\Dictionaries
  */
-final class ApiResponsesDictionary
+final class ApiResponseDictionary
 {
     const SUCCESS = ['message' => "La operación se realizó Correctamente", 'code' => 200];
     const SUCCESS_DEFAULT = ['message' => "La operación se realizó Correctamente",

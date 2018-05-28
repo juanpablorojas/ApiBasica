@@ -2,16 +2,15 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
+include_once '../../vendor/autoload.php';
 
-$repository = new DbRepository();
+use ApiBasica\Repositories\DbRepository;
+
+$repo = new DbRepository();
 
 $initialRecord = getId();
 
-
-$stmt = $repository->readPaging(
-    $from_record_num,
-    $records_per_page
-);
+$stmt = $repo->readPaging();
 
 var_dump($stmt);
 
@@ -23,4 +22,3 @@ function getId()
     isset($_GET['id']) ? $id = $_GET['id'] : $id = null;
     return $id;
 }
-

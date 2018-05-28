@@ -8,7 +8,7 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 include_once ('../Repositories/DbRepository.php');
-include_once ('../Dictionary/ApiResponsesDictionary.php');
+include_once('../Dictionaries/ApiResponseDictionary.php');
 
 use ApiExperimental\src\Dictionaries\ApiResponsesDictionary;
 use ApiExperimental\src\Repositories\DbRepository;
