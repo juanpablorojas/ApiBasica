@@ -19,8 +19,7 @@
   },
   "autoload": {
     "psr-4": {
-      "ApiBasica\\": "src",
-      "ApiBasica\\vendor\\" : "vendor"
+      "ApiBasica\\": "src"
     }
   }
 }
